@@ -1,0 +1,18 @@
+{{- range .Values.assignments -}}
+{{- if eq .assignmentType "metal3" -}}
+{{- $nodeConfig := (get $.Values.nodes .node) -}}
+---
+apiVersion: v1 
+kind: Secret
+metadata:
+ name: {{ .node }}-net-config
+ namespace: {{ .namespace }}
+ annotations:
+   argocd.argoproj.io/sync-options: 'Prune=false,PruneLast=true'
+type: Opaque
+stringData:
+  nmstate: |
+    {{- toYaml $nodeConfig.network.nmstateConfig | nindent 4 }}
+---
+{{ end }}
+{{ end }}
