@@ -5,5 +5,5 @@ metadata:
 spec:
   text: "The cluster is running ocp-base-config {{ .Chart.Version }}"
   location: BannerTop 
-  color: '#fff'
+  color: '#333'
   backgroundColor: '#0088ce'
